@@ -1,0 +1,29 @@
+{
+  "id": "2",
+  "name": "Mission 7",
+  "crewCount": 3,
+  "departureDate": "2023-02-15",
+  "destination": "Moon",
+  "members": [
+    {
+      "id": "1",
+      "name": "Emily Smith",
+      "type": "Pilot",
+      "experience": 12
+    },
+    {
+      "id": "3",
+      "name": "Liu Wei",
+      "type": "Engineer",
+      "experience": 6,
+      "job": "Navigation"
+    },
+    {
+      "id": "5",
+      "name": "Alex Johnson",
+      "type": "Passenger",
+      "age": 35,
+      "wealth": "high"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import "./globals.css";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import { store } from "./store";
-import { router } from "./router";
+import { router } from "./routes/router";
 import { GlobalErrorBoundary } from "./components/GlobalErrorBoundary";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

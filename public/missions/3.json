@@ -1,0 +1,36 @@
+{
+  "id": "3",
+  "name": "Mission 8",
+  "crewCount": 4,
+  "departureDate": "2023-03-10",
+  "destination": "Venus",
+  "members": [
+    {
+      "id": "2",
+      "name": "Mohamed Yilmaz",
+      "type": "Pilot",
+      "experience": 8
+    },
+    {
+      "id": "4",
+      "name": "Ashok Kumar",
+      "type": "Engineer",
+      "experience": 9,
+      "job": "Maintenance"
+    },
+    {
+      "id": "7",
+      "name": "Maria Lopez",
+      "type": "Engineer",
+      "experience": 5,
+      "job": "Solar panels"
+    },
+    {
+      "id": "8",
+      "name": "John Doe",
+      "type": "Passenger",
+      "age": 42,
+      "wealth": "moderate"
+    }
+  ]
+}

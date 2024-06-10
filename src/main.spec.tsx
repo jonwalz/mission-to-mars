@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { render, waitFor, screen } from "@testing-library/react";
-import { routes } from "./router";
+import { routes } from "./routes/router";
 
 describe("Main", () => {
   test("should be true", () => {
