@@ -1,14 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Missions } from "./pages/missions";
+import { NewMission } from "./pages/new";
+import { EditMission } from "./pages/edit";
+import { NotFound } from "./pages/notFound";
 
-// Stubs
-// eslint-disable-next-line react-refresh/only-export-components
-const Missions = () => <div>Missions</div>;
-// eslint-disable-next-line react-refresh/only-export-components
-const NewMission = () => <div>New Mission</div>;
-// eslint-disable-next-line react-refresh/only-export-components
-const EditMission = () => <div>Edit Mission</div>;
-
-export const router = createBrowserRouter([
+export const routes = [
   {
     path: "/",
     element: <Missions />,
@@ -21,4 +17,10 @@ export const router = createBrowserRouter([
     path: "edit/:missionId",
     element: <EditMission />,
   },
-]);
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+];
+
+export const router = createBrowserRouter(routes);
