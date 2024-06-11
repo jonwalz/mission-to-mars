@@ -11,21 +11,21 @@
       "id": "2",
       "name": "Mission 7",
       "crewCount": 3,
-      "departureDate": "2023-06-01",
+      "departureDate": "2023-03-11",
       "destination": "Moon"
     },
     {
       "id": "3",
-      "name": "Mission 7",
+      "name": "Mission 8",
       "crewCount": 3,
-      "departureDate": "2023-06-01",
-      "destination": "Moon"
+      "departureDate": "2024-12-01",
+      "destination": "Pluto"
     },
     {
       "id": "4",
-      "name": "Mission 7",
-      "crewCount": 3,
-      "departureDate": "2023-06-01",
+      "name": "Mission 9",
+      "crewCount": 8,
+      "departureDate": "2024-11-14",
       "destination": "Moon"
     }
   ]

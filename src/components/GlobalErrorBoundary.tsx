@@ -27,7 +27,9 @@ class GlobalErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return this.props.fallback || <h1>Something went wrong.</h1>;
+      return (
+        this.props.fallback || <h1>Page not found. Something went wrong.</h1>
+      );
     }
 
     return this.props.children;

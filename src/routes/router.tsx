@@ -1,13 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
 import { NotFound } from "../pages/notFound";
-import { missionsRoute } from "./root";
-import { newMissionRoute } from "./newMission";
-import { editMissionRoute } from "./editMission";
+import { Missions } from "@/pages/missions/page";
+import { NewMission } from "@/pages/new";
+import { EditMission } from "@/pages/edit";
 
 export const routes = [
-  missionsRoute,
-  newMissionRoute,
-  editMissionRoute,
+  {
+    path: "/",
+    element: <Missions />,
+  },
+  {
+    path: "new",
+    element: <NewMission />,
+  },
+  {
+    path: "edit/:missionId",
+    element: <EditMission />,
+  },
   {
     path: "*",
     element: <NotFound />,

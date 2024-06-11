@@ -1,5 +1,5 @@
 import { useGetSingleMissionQuery } from "@/api";
-import { Layout } from "@/components/layout";
+import { Layout } from "@/components/Layout";
 import { useParams } from "react-router-dom";
 
 export const EditMission = () => {
@@ -14,7 +14,7 @@ export const EditMission = () => {
   }
 
   return (
-    <Layout role="edit-mission">
+    <Layout title="Edit Mission" role="edit-mission">
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </Layout>
   );
