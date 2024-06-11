@@ -1,20 +1,52 @@
-import { describe, test, expect } from "vitest";
+import { vi, describe, test } from "vitest";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { render, waitFor, screen } from "@testing-library/react";
 import { routes } from "./routes/router";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import { api, useGetMissionsQuery, useGetSingleMissionQuery } from "./api";
+
+vi.mock("@/api", async (importOriginal) => {
+  const actual: object = await importOriginal();
+  return {
+    ...actual,
+    useGetMissionsQuery: vi.fn(),
+    useGetSingleMissionQuery: vi.fn(),
+  };
+});
+
+const mockStore = configureStore({
+  reducer: {
+    [api.reducerPath]: api.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
+});
+
+function doRender(router: ReturnType<typeof createMemoryRouter>) {
+  render(
+    <Provider store={mockStore}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
+}
 
 describe("Main", () => {
-  test("should be true", () => {
-    expect(true).toBe(true);
-  });
-
   test("Should render Missions page for root route", async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ["/"],
       initialIndex: 0,
     });
 
-    render(<RouterProvider router={router} />);
+    vi.mocked(useGetMissionsQuery).mockReturnValue({
+      data: [],
+      isLoading: false,
+      isError: false,
+      error: null,
+      refetch: vi.fn(),
+    });
+
+    doRender(router);
 
     await waitFor(() => screen.getByRole("missions"));
   });
@@ -25,7 +57,15 @@ describe("Main", () => {
       initialIndex: 1,
     });
 
-    render(<RouterProvider router={router} />);
+    vi.mocked(useGetMissionsQuery).mockReturnValue({
+      data: [],
+      isLoading: false,
+      isError: false,
+      error: null,
+      refetch: vi.fn(),
+    });
+
+    doRender(router);
 
     await waitFor(() => screen.getByRole("new-mission"));
   });
@@ -36,7 +76,15 @@ describe("Main", () => {
       initialIndex: 2,
     });
 
-    render(<RouterProvider router={router} />);
+    vi.mocked(useGetSingleMissionQuery).mockReturnValue({
+      data: [],
+      isLoading: false,
+      isError: false,
+      error: null,
+      refetch: vi.fn(),
+    });
+
+    doRender(router);
 
     await waitFor(() => screen.getByRole("edit-mission"));
   });

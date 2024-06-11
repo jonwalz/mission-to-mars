@@ -29,7 +29,7 @@ export const Missions = () => {
         </Button>
       }
     >
-      {data ? (
+      {data?.length ? (
         <DataTable columns={columns} data={data} />
       ) : (
         <div>No missions found</div>

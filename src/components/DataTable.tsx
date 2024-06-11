@@ -34,7 +34,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="col-span-4 rounded-md border">
       <Table>
-        <TableHeader>
+        <TableHeader className="hidden md:table-header-group  ">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -58,10 +58,21 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className="flex flex-col md:table-row w-full"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  <TableCell key={cell.id} className="p-2 md:p-4">
+                    <div className="flex md:block items-center justify-between">
+                      <div className="font-bold md:hidden">
+                        {cell.column.columnDef.header?.toString()}
+                      </div>
+                      <div>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </div>
+                    </div>
                   </TableCell>
                 ))}
               </TableRow>

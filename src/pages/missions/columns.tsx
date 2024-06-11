@@ -35,9 +35,9 @@ export const columns: ColumnDef<MissionRow, string>[] = [
 
       return (
         <div>
-          <div className="text-xs">{info.getValue()}</div>
+          <div className="text-sm">{info.getValue()}</div>
           <div
-            className={`text-xs ${
+            className={`text-xs italic ${
               isPastDeparture ? "text-red-500" : "text-gray-500"
             }`}
           >
