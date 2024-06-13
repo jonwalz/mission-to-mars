@@ -2,6 +2,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { Input } from "../ui/input";
 import { ErrorMessage } from "@hookform/error-message";
+import { Label } from "../ui/label";
 
 interface PilotFieldsProps {
   index: number;
@@ -21,14 +22,15 @@ export function PilotFields({ index }: PilotFieldsProps) {
 
   return (
     <div className="space-y-1">
-      <label
+      <Label
         htmlFor={`members.${index}.experience`}
         className="block text-sm font-medium text-gray-700"
       >
         Experience
-      </label>
+      </Label>
 
       <Input
+        id={`members.${index}.experience`}
         className="grid-row-start-2"
         {...register(`members.${index}.experience`, {
           valueAsNumber: true,

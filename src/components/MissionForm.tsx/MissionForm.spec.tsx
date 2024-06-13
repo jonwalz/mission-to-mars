@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { MissionForm } from ".";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { MissionForm } from ".";
 
 function doRender() {
-  render(
+  return render(
     // <Provider store={mockStore}>
     <MemoryRouter>
       <MissionForm />
@@ -25,17 +25,95 @@ describe("MissionForm", () => {
     expect(departureInput).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
   });
+
+  it("Should display a validation message for empty 'name' field on submit attempt", async () => {
+    doRender();
+    const submitButton = screen.getByRole("button", { name: /Create/i });
+
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      const nameError = screen.getByText("Mission name is required");
+      expect(nameError).toBeInTheDocument();
+    });
+  });
+
+  it("Should display a validation message for empty 'destination' field on submit attempt", async () => {
+    doRender();
+    const submitButton = screen.getByRole("button", { name: /Create/i });
+
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      const destinationError = screen.getByText("Destination is required");
+      expect(destinationError).toBeInTheDocument();
+    });
+  });
+
+  it("Should allow input of a mission name", async () => {
+    doRender();
+    const nameInput = screen.getByLabelText(/name/i);
+    const testMissionName = "Test Mission";
+
+    fireEvent.change(nameInput, { target: { value: testMissionName } });
+
+    expect((nameInput as HTMLInputElement).value).toBe(testMissionName);
+  });
+
+  it("Should allow input of a mission destination", async () => {
+    doRender();
+    const destinationInput = screen.getByLabelText(/destination/i);
+    const testMissionDestination = "Test Destination";
+
+    fireEvent.change(destinationInput, {
+      target: { value: testMissionDestination },
+    });
+
+    expect((destinationInput as HTMLInputElement).value).toBe(
+      testMissionDestination
+    );
+  });
+
+  it("Should allow input of a mission departure date", async () => {
+    doRender();
+    const departureInput = screen.getByLabelText(/departure/i);
+    const testMissionDeparture = "2022-12-31";
+
+    fireEvent.change(departureInput, {
+      target: { value: testMissionDeparture },
+    });
+
+    expect((departureInput as HTMLInputElement).value).toBe(
+      testMissionDeparture
+    );
+  });
+
+  it("Should allow addition of a pilot member", async () => {
+    const { container } = doRender();
+
+    const addButton = screen.getByText(/New Member/i);
+    const memberTypeSelect = screen.getByLabelText(/Type/i);
+    const experienceInput = screen.getByLabelText(/Experience/i);
+    screen.debug(experienceInput, 100000);
+    const testExperience = "15";
+
+    // Select 'Pilot' from member type dropdown
+    fireEvent.change(memberTypeSelect, { target: { value: "Pilot" } });
+
+    // Input experience
+    fireEvent.change(experienceInput, { target: { value: testExperience } });
+
+    // Click 'New Member' button to add the pilot
+    fireEvent.click(addButton);
+
+    // Check if the pilot member with the given experience is added
+    screen.debug(container, 100000);
+
+    const pilotMember = screen.getAllByText(/Pilot/);
+    expect(pilotMember.length).toBe(4);
+  });
 });
 
-// TODO: Should display default values if any are specified in the form logic
-// TODO: Should display a validation message for empty 'name' field on submit attempt
-// TODO: Should display a validation message for empty 'destination' field on submit attempt
-// TODO: Should display a validation message for empty 'departure' field on submit attempt
-// TODO: Should display a validation message for empty 'members' field on submit attempt
-// TODO: Should allow input of a mission name
-// TODO: Should allow input of a mission destination
-// TODO: Should allow input of a mission departure date
-// TODO: Should allow addition of a pilot member
 // TODO: Should validate that pilot experience is at least 10
 // TODO: Should allow addition of an engineer member
 // TODO: Should validate that engineer has one of the specified job specialties

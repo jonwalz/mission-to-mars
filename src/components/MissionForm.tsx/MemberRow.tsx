@@ -54,6 +54,7 @@ export function MemberRow({ index, remove, control }: MemberRowProps) {
             render={({ field }) => {
               return (
                 <Select
+                  name={field.name}
                   defaultValue={field.value}
                   onValueChange={(
                     value: "Pilot" | "Engineer" | "Passenger"
@@ -61,7 +62,7 @@ export function MemberRow({ index, remove, control }: MemberRowProps) {
                     field.onChange(value);
                   }}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger id={`members.${index}.memberType`}>
                     <SelectValue placeholder="Select a member type" />
                   </SelectTrigger>
                   <SelectContent>

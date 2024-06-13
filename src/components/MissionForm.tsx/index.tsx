@@ -63,8 +63,6 @@ const MissionForm: React.FC = () => {
     console.log("Submit", data);
   };
 
-  const selectDestination = register("destination");
-
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 col-span-4">
@@ -106,7 +104,7 @@ const MissionForm: React.FC = () => {
                     return (
                       <>
                         <Select
-                          name={selectDestination.name}
+                          name={field.name}
                           onValueChange={(value) => field.onChange(value)}
                         >
                           <SelectTrigger id="destination">
@@ -187,6 +185,13 @@ const MissionForm: React.FC = () => {
                       </Popover>
                     );
                   }}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="departure"
+                  render={(e) => (
+                    <p className="text-xs text-red-500">{e.message}</p>
+                  )}
                 />
               </div>
             </div>
