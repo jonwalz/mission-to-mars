@@ -9,25 +9,30 @@ export interface Mission {
 export interface MissionDetails extends Mission {
   crew: (Pilot | Engineer | Passenger)[];
 }
-
-interface CrewMember {
+export type Pilot = {
   id: string;
-  type: "Pilot" | "Engineer" | "Passenger";
-}
-
-export interface Pilot extends CrewMember {
-  type: "Pilot";
+  memberType: "Pilot";
   experience: number; // Experience in years
-}
+};
 
-export interface Engineer extends CrewMember {
-  type: "Engineer";
+export type EngineerJobs =
+  | "navigation"
+  | "solar-panels"
+  | "maintenance"
+  | "mechanics";
+
+export type Engineer = {
+  id: string;
+  memberType: "Engineer";
   experience: number; // Experience in years
-  job: "Navigation" | "Solar panels" | "Maintenance" | "Mechanics";
-}
+  job: EngineerJobs;
+};
 
-export interface Passenger extends CrewMember {
-  type: "Passenger";
+export type Passenger = {
+  id: string;
+  memberType: "Passenger";
   age: number;
   wealth: "moderate" | "high" | "ultra-high";
-}
+};
+
+export type CrewMember = Pilot | Engineer | Passenger;
